@@ -2,7 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
-import router from "./routing/routes";
+import router from "./routes/routes.js";
+import { initializeDatabase } from "./controllers/transactionController.js";
 
 const app = express();
 const { json } = bodyParser;
@@ -21,6 +22,7 @@ const connectDB = async () => {
       "mongodb://127.0.0.1:27017/transactions"
     );
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+    await initializeDatabase(); 
   } catch (error) {
     console.error("MongoDB Connection Error:", error.message);
     process.exit(1);

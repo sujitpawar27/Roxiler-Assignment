@@ -19,7 +19,7 @@ const getMonthNumber = (month) => {
   return months[month];
 };
 
-export const initializeDatabase = async (req, res) => {
+export const initializeDatabase = async () => {
   try {
     const response = await axios.get(
       "https://s3.amazonaws.com/roxiler.com/product_transaction.json"
@@ -33,10 +33,10 @@ export const initializeDatabase = async (req, res) => {
     await Transaction.deleteMany();
     await Transaction.insertMany(transactions);
 
-    res.status(200).send("Database initialized with seed data");
+    console.log("Database initialized successfully.");
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Error initializing database");
+    console.error("Error during database initialization:", error);
+    throw new Error("Error initializing database");
   }
 };
 
@@ -185,13 +185,3 @@ export const getPieChartData = async (req, res) => {
   res.json(pieChart);
 };
 
-export const getCombinedData = async (req, res) => {
-  const { month } = req.query;
-  const [transactions, statistics, barChart, pieChart] = await Promise.all([
-    listTransactions(req, res),
-    getStatistics(req, res),
-    getBarChartData(req, res),
-    getPieChartData(req, res),
-  ]);
-  res.json({ transactions, statistics, barChart, pieChart });
-};

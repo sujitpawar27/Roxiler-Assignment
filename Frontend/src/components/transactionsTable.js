@@ -48,7 +48,12 @@ const TransactionsTable = ({ selectedMonth, onMonthChange }) => {
   };
 
   return (
-    <div>
+    <div style={{
+      width: "100%", // Add width
+      height: "100%",
+      backgroundColor: "rgba(50, 156, 147, 0.1)",
+      padding: "20px",
+    }}>
       <h1 className="circle">Transactions Dashboard</h1>
       <div className="tableContainer">
         <div
