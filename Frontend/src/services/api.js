@@ -1,19 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_BASE_URL = 'http://localhost:5000/api'; 
+const API_BASE_URL = "http://localhost:5000/api";
 
-// export const Transaction_URL = `${API_BASE_URL}/transactions`;
 
 const handleAxiosError = (error) => {
   if (error.response) {
-    console.error('Response error:', error.response.data);
-    console.error('Status code:', error.response.status);
+    console.error("Response error:", error.response.data);
+    console.error("Status code:", error.response.status);
   } else if (error.request) {
-    console.error('Request error:', error.request);
+    console.error("Request error:", error.request);
   } else {
-    console.error('Error:', error.message);
+    console.error("Error:", error.message);
   }
-  console.error('Config:', error.config);
+  console.error("Config:", error.config);
 };
 
 export const getTransactions = async (month, searchTerm, page = 1) => {
